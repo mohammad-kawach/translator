@@ -2,19 +2,19 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import ThemeToggler from "./components/ThemeToggler";
 import SocialIcons from "./components/SocialIcons";
+import TextInput from "./components/TextInput";
 
 function App() {
   const [sourceLanguage, setSourceLanguage] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("");
-  const [text, setText] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
-  const theme = useSelector((state) => state.theme.theme);
+  // const [translatedText, setTranslatedText] = useState("");
+  const theme = useSelector((state) => state.reducer.theme);
 
   const handleTranslate = () => {
     // Add your translation logic here
     // For this example, let's simply reverse the input text
-    const reversedText = text.split("").reverse().join("");
-    setTranslatedText(reversedText);
+    // const reversedText = text.split("").reverse().join("");
+    // setTranslatedText(reversedText);
   };
 
   return (
@@ -84,16 +84,7 @@ function App() {
             {/* Add your language options here */}
           </select>
         </div>
-        <textarea
-          className={`w-full h-32 p-3 mb-4 border border-gray-300 rounded-md resize-none focus:outline-none ${
-            theme === "dark"
-              ? "bg-gray-700 text-white"
-              : "bg-white text-gray-800"
-          }`}
-          placeholder="Enter text to translate"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        ></textarea>
+        <TextInput />
         <button
           className={`w-full py-2 px-4 ${
             theme === "dark"
@@ -104,7 +95,7 @@ function App() {
         >
           Translate
         </button>
-        {translatedText && (
+        {/* {translatedText && (
           <div className="mt-6">
             <h3
               className={`text-lg font-bold mb-2 ${
@@ -121,7 +112,7 @@ function App() {
               {translatedText}
             </p>
           </div>
-        )}
+        )} */}
       </div>
       <SocialIcons />
     </div>

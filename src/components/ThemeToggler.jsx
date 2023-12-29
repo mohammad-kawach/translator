@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../features/theme/themeSlice";
 
 const ThemeToggler = () => {
-  const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state) => state.reducer.theme);
 
   const dispatch = useDispatch();
 
