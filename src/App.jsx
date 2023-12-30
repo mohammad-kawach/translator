@@ -6,21 +6,16 @@ import TextInput from "./components/TextInput";
 import { fetchSupportedLanguages } from "./utils/fetchSupportedLanguages";
 import LanguageSelector from "./components/LanguageSelector";
 import TranslateButton from "./components/TranslateButton";
+import TranslatedText from "./components/TranslatedText";
+import CustomHeading from "./components/CustomHeading";
 
 function App() {
   const theme = useSelector((state) => state.reducer.theme);
 
   const dispatch = useDispatch();
 
-  const supportedLanguages = useSelector(
-    (state) => state.reducer.language.supportedLanguages
-  );
-  // const error = useSelector((state) => state.language.error);
-
   useEffect(() => {
     dispatch(fetchSupportedLanguages());
-    console.log("fetchSupportedLanguages : ", fetchSupportedLanguages());
-    console.log("supportedLanguages : ", supportedLanguages);
   }, [dispatch]);
 
   return (
@@ -29,13 +24,7 @@ function App() {
         theme === "dark" ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
-      <h1
-        className={`text-4xl font-bold mb-8 ${
-          theme === "dark" ? "text-white" : "text-gray-800"
-        }`}
-      >
-        Translator
-      </h1>
+      <CustomHeading text="Translator" />
       <div
         className={`w-96 bg-gray-800 rounded-lg shadow-lg p-6 ${
           theme === "dark" ? "text-white" : "bg-white text-gray-800"
@@ -46,24 +35,7 @@ function App() {
         <LanguageSelector htmlFor="targetLanguage" text="Target Language" />
         <TextInput />
         <TranslateButton />
-        {/* {translatedText && (
-          <div className="mt-6">
-            <h3
-              className={`text-lg font-bold mb-2 ${
-                theme === "dark" ? "text-white" : "text-gray-800"
-              }`}
-            >
-              Translated Text:
-            </h3>
-            <p
-              className={`text-gray-300 ${
-                theme === "dark" ? "text-white" : "text-gray-700"
-              }`}
-            >
-              {translatedText}
-            </p>
-          </div>
-        )} */}
+        <TranslatedText />
       </div>
       <SocialIcons />
     </div>

@@ -32,16 +32,13 @@ const LanguageSelector = (props) => {
   }, [dispatch]);
 
   function handleChange(lang) {
-    console.log("handleChange lang : ", lang);
     setSelectedLanguage(lang);
   }
 
   useEffect(() => {
     if (props.htmlFor == "sourceLanguage") {
-      console.log("Source");
       dispatch(setSourceLanguage(selectedLanguage));
     } else if (props.htmlFor == "targetLanguage") {
-      console.log("Target");
       dispatch(setTargetLanguage(selectedLanguage));
     }
   }, [selectedLanguage]);

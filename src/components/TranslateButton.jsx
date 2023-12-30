@@ -1,12 +1,31 @@
 // import React from "react"; v
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import translateText from "../utils/translateText";
+import { setTranslatedText } from "../features/text/textSlice";
 
 const TranslateButton = () => {
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.reducer.theme);
 
-  function handleTranslate() {
-    console.log("handleTranslate");
+  const sourceLang = useSelector(
+    (state) => state.reducer.language.sourceLanguage
+  );
+
+  const targetLang = useSelector(
+    (state) => state.reducer.language.targetLanguage
+  );
+
+  const text = useSelector((state) => state.reducer.text.text);
+
+  async function handleTranslate() {
+    try {
+      const translatedText = await translateText(text, sourceLang, targetLang);
+      dispatch(setTranslatedText(translatedText.trans));
+      
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

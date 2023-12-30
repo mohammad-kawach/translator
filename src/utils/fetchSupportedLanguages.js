@@ -18,7 +18,6 @@ export const fetchSupportedLanguages = () => {
     try {
       const response = await axios.request(options);
       dispatch(setSupportedLanguages(response.data));
-      console.log(response.data);
     } catch (error) {
       dispatch(setError(error));
     }
