@@ -5,6 +5,7 @@ import SocialIcons from "./components/SocialIcons";
 import TextInput from "./components/TextInput";
 import { fetchSupportedLanguages } from "./utils/fetchSupportedLanguages";
 import LanguageSelector from "./components/LanguageSelector";
+import TranslateButton from "./components/TranslateButton";
 
 function App() {
   const theme = useSelector((state) => state.reducer.theme);
@@ -21,10 +22,6 @@ function App() {
     console.log("fetchSupportedLanguages : ", fetchSupportedLanguages());
     console.log("supportedLanguages : ", supportedLanguages);
   }, [dispatch]);
-
-  const handleTranslate = () => {
-    console.log("Supported Languages : ", supportedLanguages);
-  };
 
   return (
     <div
@@ -44,22 +41,11 @@ function App() {
           theme === "dark" ? "text-white" : "bg-white text-gray-800"
         }`}
       >
-        <div className="mb-4 flex justify-center">
-          <ThemeToggler />
-        </div>
+        <ThemeToggler />
         <LanguageSelector htmlFor="sourceLanguage" text="Source Language" />
         <LanguageSelector htmlFor="targetLanguage" text="Target Language" />
         <TextInput />
-        <button
-          className={`w-full py-2 px-4 ${
-            theme === "dark"
-              ? "bg-gray-700 hover:bg-gray-600"
-              : "bg-blue-500 hover:bg-blue-600"
-          } text-white font-semibold rounded-md transition-colors duration-300`}
-          onClick={handleTranslate}
-        >
-          Translate
-        </button>
+        <TranslateButton />
         {/* {translatedText && (
           <div className="mt-6">
             <h3

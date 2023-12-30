@@ -14,7 +14,8 @@ const ThemeToggler = () => {
   };
 
   return (
-    <label className="switch">
+    <div className="mb-4 flex justify-center">
+      <label className="switch">
         <span className="sun">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g fill="#ffd43b">
@@ -36,7 +37,8 @@ const ThemeToggler = () => {
         />
         <span className="slider"></span>
       </label>
-  )
-}
+    </div>
+  );
+};
 
-export default ThemeToggler
+export default ThemeToggler;

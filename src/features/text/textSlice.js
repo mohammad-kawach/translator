@@ -2,13 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const textSlice = createSlice({
   name: "text",
-  initialState: "",
+  initialState: {
+    text: "",
+    translatedText: "",
+  },
   reducers: {
     setText: (state, action) => {
-      state = action.payload;
+      state.text = action.payload;
+    },
+    setTranslatedText: (state, action) => {
+      state.translatedText = action.payload;
     },
   },
 });
 
-export const { setText } = textSlice.actions;
+export const { setText, setTranslatedText } = textSlice.actions;
 export default textSlice.reducer;
