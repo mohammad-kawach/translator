@@ -1,20 +1,29 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ThemeToggler from "./components/ThemeToggler";
 import SocialIcons from "./components/SocialIcons";
 import TextInput from "./components/TextInput";
+import { fetchSupportedLanguages } from "./utils/fetchSupportedLanguages";
+import LanguageSelector from "./components/LanguageSelector";
 
 function App() {
-  const [sourceLanguage, setSourceLanguage] = useState("");
-  const [targetLanguage, setTargetLanguage] = useState("");
-  // const [translatedText, setTranslatedText] = useState("");
   const theme = useSelector((state) => state.reducer.theme);
 
+  const dispatch = useDispatch();
+
+  const supportedLanguages = useSelector(
+    (state) => state.reducer.language.supportedLanguages
+  );
+  // const error = useSelector((state) => state.language.error);
+
+  useEffect(() => {
+    dispatch(fetchSupportedLanguages());
+    console.log("fetchSupportedLanguages : ", fetchSupportedLanguages());
+    console.log("supportedLanguages : ", supportedLanguages);
+  }, [dispatch]);
+
   const handleTranslate = () => {
-    // Add your translation logic here
-    // For this example, let's simply reverse the input text
-    // const reversedText = text.split("").reverse().join("");
-    // setTranslatedText(reversedText);
+    console.log("Supported Languages : ", supportedLanguages);
   };
 
   return (
@@ -38,52 +47,8 @@ function App() {
         <div className="mb-4 flex justify-center">
           <ThemeToggler />
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="sourceLanguage"
-            className={`text-sm font-semibold mb-2 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-800"
-            }`}
-          >
-            Source Language
-          </label>
-          <select
-            id="sourceLanguage"
-            className={`w-full p-2 border border-gray-300 rounded-md focus:outline-none ${
-              theme === "dark"
-                ? "bg-gray-700 text-white"
-                : "bg-white text-gray-800"
-            }`}
-            value={sourceLanguage}
-            onChange={(e) => setSourceLanguage(e.target.value)}
-          >
-            <option value="">Select source language</option>
-            {/* Add your language options here */}
-          </select>
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="targetLanguage"
-            className={`text-sm font-semibold mb-2 ${
-              theme === "dark" ? "text-gray-300" : "text-gray-800"
-            }`}
-          >
-            Target Language
-          </label>
-          <select
-            id="targetLanguage"
-            className={`w-full p-2 border border-gray-300 rounded-md focus:outline-none ${
-              theme === "dark"
-                ? "bg-gray-700 text-white"
-                : "bg-white text-gray-800"
-            }`}
-            value={targetLanguage}
-            onChange={(e) => setTargetLanguage(e.target.value)}
-          >
-            <option value="">Select target language</option>
-            {/* Add your language options here */}
-          </select>
-        </div>
+        <LanguageSelector htmlFor="sourceLanguage" text="Source Language" />
+        <LanguageSelector htmlFor="targetLanguage" text="Target Language" />
         <TextInput />
         <button
           className={`w-full py-2 px-4 ${
